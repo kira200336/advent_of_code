@@ -16,20 +16,18 @@ pub fn day_3() {
             'v' => santa_curr[0] -= 1,
             _ => {},
         };
-
-        if !visited.contains(&santa_curr) {
-            count += 1;
-            visited.insert(santa_curr.clone());
-        }
+        visited.insert(santa_curr.clone());
     }
-    println!("{count}");
+    println!("{}", visited.len());
     
     santa_curr[0] = 0;
     santa_curr[1] = 0;
-    count = 1;
+    visited.clear();
     let mut iter: i32 = 1;
+
     for i in input.chars() {
-        match iter % 2 {
+        iter = 1 - iter;
+        match iter {
             0 => {
                 match i{
                 '>' => santa_curr[1] += 1,
@@ -38,11 +36,7 @@ pub fn day_3() {
                 'v' => santa_curr[0] -= 1,
                 _ => {},
                 };
-                iter += 1;
-                if !visited.contains(&santa_curr) {
-                    count += 1;
-                    visited.insert(santa_curr.clone());
-                }
+                visited.insert(santa_curr.clone());
             },
             1 => {
                 match i {
@@ -52,14 +46,10 @@ pub fn day_3() {
                     'v' => robo_curr[0] -= 1,
                     _ => {},
                 };
-                iter += 1;
-                if !visited.contains(&robo_curr) {
-                    count += 1;
-                    visited.insert(robo_curr.clone());
-                }
+                visited.insert(robo_curr.clone());
             },
-            _ => {}
+            _ => {},
         }
     }
-    println!("{count}");
+    println!("{}",visited.len());
 }
